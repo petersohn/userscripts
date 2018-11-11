@@ -1,18 +1,22 @@
 // ==UserScript==
 // @name         Youtube No Playlist
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @description  Add a link to YouTube playlists to play video without list.
 // @author       You
-// @match        https://www.youtube.com/playlist?*
-// @require      https://raw.githubusercontent.com/petersohn/userscripts/master/helpers/sync.js
+// @match        https://www.youtube.com/*
 // @grant        none
 // ==/UserScript==
 
-waitForElement(1000,
-    function() {
-        return document.querySelector("div#contents");
-    }).then(function(contents) {
+var previousUrl = ""
+
+setInterval(function() {
+    if (document.URL != previousUrl) {
+        let contents = document.querySelector("div#contents");
+        if (contents == null) {
+            return;
+        }
+        previousUrl = document.URL;
         let elements = contents.querySelectorAll("a.ytd-playlist-video-renderer");
         for (let i = 0; i < elements.length; ++i) {
             let match = elements[i].href.match(".*?v=\\w*");
@@ -25,4 +29,5 @@ waitForElement(1000,
             let title = elements[i].querySelector("span#video-title");
             title.appendChild(link);
         }
-    })
+    }
+}, 1000);
