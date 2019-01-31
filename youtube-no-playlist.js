@@ -17,7 +17,7 @@ setInterval(function() {
             continue;
         }
         for (let i = 0; i < elements.length; ++i) {
-            let match = elements[i].href.match(".*?v=\\w*");
+            let match = elements[i].href.match(".*?v=[^&]*");
             if (match.length == 0) {
                 continue;
             }
