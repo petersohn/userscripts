@@ -10,5 +10,5 @@
 // ==/UserScript==
 
 waitForElement(1000,
-    function() { return document.querySelector("a.close"); },
+    function() { return document.querySelector("a.close"); }).then(
     function(button) { button.parentNode.parentNode.remove(); }, 1000);
