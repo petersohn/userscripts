@@ -1,16 +1,13 @@
 // ==UserScript==
 // @name         TVTropes
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @description  Remove ad notifications from TVTropes.
 // @author       You
 // @match        https://tvtropes.org/*
 // @grant        none
 // ==/UserScript==
 
-setInterval(function() {
-    let button = document.querySelector("a.close");
-    if (button !== null) {
-        button.click();
-    }
-}, 1000);
+waitForElement(1000,
+    function() { return document.querySelector("a.close"); },
+    function(button) { button.parentNode.parentNode.remove(); }, 1000);
