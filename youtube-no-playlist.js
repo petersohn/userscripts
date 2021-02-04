@@ -21,7 +21,8 @@ setInterval(function() {
             if (match.length == 0) {
                 continue;
             }
-            let link = elements[i].querySelector("a#watch-without-list");
+            let parent = elements[i].parentElement;
+            let link = parent.querySelector("a#watch-without-list");
             if (link != null) {
                 link.setAttribute("href", match[0]);
             } else {
@@ -29,8 +30,7 @@ setInterval(function() {
                 link.setAttribute("href", match[0]);
                 link.setAttribute("id", "watch-without-list");
                 link.innerHTML = "watch without list";
-                let title = elements[i].querySelector("span#video-title");
-                title.appendChild(link);
+                parent.appendChild(link);
             }
         }
         break;
