@@ -4,7 +4,7 @@
 // @version      1.0
 // @description  Load all assets.
 // @author       You
-// @match        https://roomstyler.com/3dplanner?*
+// @match        https://roomstyler.com/3dplanner*
 // @icon         https://www.google.com/s2/favicons?domain=roomstyler.com
 // @require      https://raw.githubusercontent.com/petersohn/userscripts/master/helpers/sync.js
 // @grant        none
