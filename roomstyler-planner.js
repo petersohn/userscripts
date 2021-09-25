@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Roomstyler planner
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      1.0.1
 // @description  Load all assets.
 // @author       You
 // @match        https://roomstyler.com/3dplanner*
