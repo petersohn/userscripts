@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Roomstyler planner
 // @namespace    http://tampermonkey.net/
-// @version      1.0.1
+// @version      1.1.0
 // @description  Load all assets.
 // @author       You
 // @match        https://roomstyler.com/3dplanner*
@@ -40,9 +40,24 @@
         working = true;
         btn.innerText = 'cancel loading';
         console.log('begin');
-        const scroller = document.querySelector('#view-search .scroller');
+        let scroller = null;
+        for (const selector of [
+            '#view-search[style*="visibility: visible"]',
+            '#view-materials-search[style*="visibility: visible"]',
+            '#view-build[style*="visibility: visible"] .build-architecture-container[style=""]',
+            '#view-build[style*="visibility: visible"] .build-architecture-container[style*="display: block"]',
+            '#view-build[style*="visibility: visible"] .build-garden-container[style=""]',
+            '#view-build[style*="visibility: visible"] .build-garden-container[style*="display: block"]',
+         ]) {
+            scroller = document.querySelector(`${selector} .scroller`);
+            if (scroller !== null) {
+                break;
+            }
+        }
+
         if (scroller === null) {
             console.log('No scroller');
+            stop();
             return;
         }
         let current = scroller.scrollHeight;
@@ -64,3 +79,4 @@
     };
     search.after(btn);
 })();
+
