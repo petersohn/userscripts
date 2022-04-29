@@ -13,15 +13,30 @@
     'use strict';
     const btn = document.createElement('button');
     btn.onclick = function() {
+        const usernameElement = document.querySelector('.username');
+        let username = null;
+        if (usernameElement !== null) {
+            username = usernameElement.innerHTML;
+        }
+
         const cards = document.querySelectorAll('.room-card');
         let totalVotes = 0;
+        let yourVotes = null;
         for (const card of cards) {
             const votes = card.querySelector('.no_votes');
             if (votes !== null) {
-                totalVotes += Number(votes.innerText);
+                const votesNumber = Number(votes.innerText);
+                totalVotes += votesNumber;
+
+                if (username !== null) {
+                    const userNode = card.querySelector('a.user');
+                    if (userNode !== null && userNode.innerText === username) {
+                        yourVotes = votesNumber;
+                    }
+                }
             }
         }
-        alert(`entries=${cards.length} votes=${totalVotes}`);
+        alert(`entries=${cards.length} votes=${totalVotes} your votes=${yourVotes}`);
     };
     btn.innerText = 'count';
     const contest_info = document.querySelector('.contest__info');
