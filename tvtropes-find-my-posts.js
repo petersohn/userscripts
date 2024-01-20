@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Find my posts
 // @namespace    http://tampermonkey.net/
-// @version      2024-01-18
+// @version      2024-01-20
 // @description  Find my posts on TVTropes forums
 // @author       You
 // @match        https://tvtropes.org/pmwiki/posts.php?*
@@ -29,6 +29,10 @@ btn.onclick = async () => {
             console.log(post.id, user);
             if (user === tvtropes_config.handle) {
                 console.log('Found!');
+                const link = post.querySelector('a.troper-post-time');
+                const url2 = new URL(url);
+                url2.hash = post.id;
+                link.href = url2.toString();
                 newElements.push(post);
             }
         }
