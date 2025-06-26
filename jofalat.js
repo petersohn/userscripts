@@ -1,8 +1,7 @@
 // ==UserScript==
 // @name         Jofalat!
-// @version      0.1
-// @match        https://www.jofalat.hu/etlap.htm
-// @require      https://code.jquery.com/jquery-3.3.1.min.js
+// @version      0.2
+// @match        https://jofalat.hu/etlap?tipus=heti
 // @grant        none
 // ==/UserScript==
 
@@ -10,5 +9,7 @@
 setInterval(function() {
    'use strict';
 
-   $('td.etelbox[style*="background-color"]').empty();
+    for (const e of document.querySelectorAll('div.is-flag-red')) {
+        e.remove();
+    }
 }, 1000);
