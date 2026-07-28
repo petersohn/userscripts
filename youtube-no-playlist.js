@@ -29,7 +29,7 @@ setInterval(function() {
                 link = document.createElement("a");
                 link.setAttribute("href", match[0]);
                 link.setAttribute("id", "watch-without-list");
-                link.innerHTML = "watch without list";
+                link.innerText = "watch without list";
                 parent.appendChild(link);
             }
         }
