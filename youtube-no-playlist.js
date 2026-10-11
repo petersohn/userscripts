@@ -9,30 +9,22 @@
 // ==/UserScript==
 
 setInterval(function() {
-    let allContents = document.querySelectorAll("div#contents");
-    for (let j = 0; j < allContents.length; ++j) {
-        let contents = allContents[j];
-        let elements = contents.querySelectorAll("a.ytd-playlist-video-renderer");
-        if (elements.length == 0) {
+    let elements = document.querySelectorAll("a.ytd-playlist-video-renderer");
+    for (let i = 0; i < elements.length; ++i) {
+        let match = elements[i].href.match(".*?v=[^&]*");
+        if (match.length == 0) {
             continue;
         }
-        for (let i = 0; i < elements.length; ++i) {
-            let match = elements[i].href.match(".*?v=[^&]*");
-            if (match.length == 0) {
-                continue;
-            }
-            let parent = elements[i].parentElement;
-            let link = parent.querySelector("a#watch-without-list");
-            if (link != null) {
-                link.setAttribute("href", match[0]);
-            } else {
-                link = document.createElement("a");
-                link.setAttribute("href", match[0]);
-                link.setAttribute("id", "watch-without-list");
-                link.innerText = "watch without list";
-                parent.appendChild(link);
-            }
+        let parent = elements[i].parentElement;
+        let link = parent.querySelector("a#watch-without-list");
+        if (link != null) {
+            link.setAttribute("href", match[0]);
+        } else {
+            link = document.createElement("a");
+            link.setAttribute("href", match[0]);
+            link.setAttribute("id", "watch-without-list");
+            link.innerText = "watch without list";
+            parent.appendChild(link);
         }
-        break;
     }
 }, 1000);
